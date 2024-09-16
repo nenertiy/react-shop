@@ -1,0 +1,49 @@
+.container {
+  margin-top: 50px;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  column-gap: 34px;
+}
+
+.link {
+  color: black;
+  text-decoration: none;
+}
+
+.cart {
+  align-items: center;
+  text-align: center;
+  display: flex;
+  color: black;
+  text-decoration: none;
+
+  &_title {
+    font-size: 12px;
+    color: white;
+    background: #000000;
+    border-radius: 22px;
+    padding: 19px 19px;
+  }
+}
+
+.icon {
+  height: 50px;
+  width: 50px;
+}
+
+.circle {
+  background: #000;
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
