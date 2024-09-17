@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import routes from "../../utils/routes";
+import { NavLink as RouterLink } from "react-router-dom";
+import links from "../../utils/links";
 
 import styles from "./Header.module.scss";
 
@@ -21,9 +21,9 @@ const Header: FC = () => {
               alt="line button"
             />
           </RouterLink>
-          {routes.map((el) => (
+          {links.map((el) => (
             <RouterLink
-              className={styles.link}
+              className={({ isActive }) => (isActive ? styles.link_active : styles.link)}
               to={el.path}
               key={el.path}>
               {el.title}

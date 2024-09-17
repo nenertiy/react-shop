@@ -1,6 +1,6 @@
 .container {
   margin-top: 50px;
-  font-size: 16px;
+  font-size: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,6 +15,16 @@
 .link {
   color: black;
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
+
+  &_active {
+    color: rgba(0, 0, 0, 0.65);
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.65);
+  }
 }
 
 .cart {
@@ -30,6 +40,11 @@
     background: #000000;
     border-radius: 22px;
     padding: 19px 19px;
+    transition: background 0.3s ease-in-out;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
   }
 }
 
@@ -46,4 +61,9 @@
   align-items: center;
   justify-content: center;
   display: flex;
+  transition: background 0.3s ease-in-out;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
 }

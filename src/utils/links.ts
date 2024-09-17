@@ -1,4 +1,4 @@
-const routes = [
+const links = [
   {
     title: "Home",
     path: "/",
@@ -16,4 +16,4 @@ const routes = [
   },
 ];
 
-export default routes;
+export default links;

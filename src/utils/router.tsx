@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../Layout";
+import Categories from "../components/Categories/Categories";
+import Category from "../components/Category/Category";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +17,16 @@ const router = createBrowserRouter([
         element: <h1>Collections</h1>,
       },
       {
+        path: "/collections/:id",
+        element: <h1>Collections:id</h1>,
+      },
+      {
         path: "/categories",
-        element: <h1>Categories</h1>,
+        element: <Categories />,
+      },
+      {
+        path: "/categories/:slug",
+        element: <Category />,
       },
       {
         path: "/favorite",
