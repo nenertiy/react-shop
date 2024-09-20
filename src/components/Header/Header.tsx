@@ -5,7 +5,7 @@ import links from "../../utils/links";
 import styles from "./Header.module.scss";
 
 import icon from "../../assets/img/icon.png";
-import line_button from "../../assets/img/line_button.svg";
+// import line_button from "../../assets/img/line_button.svg";
 import favorite from "../../assets/img/favorite.svg";
 import cart from "../../assets/img/cart.svg";
 import profile from "../../assets/img/profile.svg";
@@ -15,12 +15,12 @@ const Header: FC = () => {
     <div className={styles.container}>
       <div>
         <ul className={styles.list}>
-          <RouterLink to="/">
+          {/* <RouterLink to="/">
             <img
               src={line_button}
               alt="line button"
             />
-          </RouterLink>
+          </RouterLink> */}
           {links.map((el) => (
             <RouterLink
               className={({ isActive }) => (isActive ? styles.link_active : styles.link)}

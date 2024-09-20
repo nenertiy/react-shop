@@ -3,6 +3,7 @@ import Layout from "../Layout";
 import Categories from "../components/Categories/Categories";
 import Category from "../components/Category/Category";
 import Product from "../components/Product/Product";
+import Products from "../components/Products/Products";
 
 const router = createBrowserRouter([
   {
@@ -14,8 +15,8 @@ const router = createBrowserRouter([
         element: <h1>Home</h1>,
       },
       {
-        path: "/collections",
-        element: <h1>Collections</h1>,
+        path: "/products",
+        element: <Products />,
       },
       {
         path: "/collections/:id",

@@ -5,8 +5,8 @@ const links = [
     element: "",
   },
   {
-    title: "Collections",
-    path: "/collections",
+    title: "Products",
+    path: "/products",
     element: "",
   },
   {

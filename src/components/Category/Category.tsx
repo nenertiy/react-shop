@@ -19,13 +19,16 @@ const Category: FC = () => {
 
   const [card, setCard] = useState<CardState[]>([]);
   const [search, setSearch] = useState<string>("");
+  const [isLoading, setLoading] = useState<boolean>(true);
   const { id } = useParams();
   console.log(id);
 
   useEffect(() => {
-    axios.get(`${API_URL}/category/${id}`).then((json) => setCard(json.data.products));
-    console.log(card);
-  }, []);
+    axios
+      .get(`${API_URL}/category/${id}`)
+      .then((json) => setCard(json.data.products))
+      .finally(() => setLoading(false));
+  }, [card, id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -42,17 +45,21 @@ const Category: FC = () => {
       </div>
       <BackButton />
       <div className={styles.cards}>
-        {card
-          .filter((el) => el.title.toLowerCase().includes(search.toLowerCase()))
-          .map((el) => (
-            <ProductCard
-              id={el.id}
-              img={el.images[0]}
-              category={el.category}
-              title={el.title}
-              price={el.price}
-            />
-          ))}
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          card
+            .filter((el) => el.title.toLowerCase().includes(search.toLowerCase()))
+            .map((el) => (
+              <ProductCard
+                id={el.id}
+                img={el.images[0]}
+                category={el.category}
+                title={el.title}
+                price={el.price}
+              />
+            ))
+        )}
       </div>
     </div>
   );

@@ -1,3 +1,72 @@
 .container {
   margin: 30px 0;
+  display: inline;
+
+  &_img {
+    height: 438px;
+    width: 366px;
+    background: #e7e7e7;
+    display: flex;
+    margin: 30px 0;
+    border: 1px solid #d9d9d9;
+    vertical-align: middle;
+  }
+
+  &_description {
+    height: 498px;
+    width: 306px;
+    // background: #949393;
+    border: 1px solid #d9d9d9;
+  }
+}
+
+.card {
+  display: flex;
+  width: 875px;
+  height: 498px;
+  // background: #000;
+  margin-top: 20px;
+  margin-inline: auto;
+  justify-content: space-between;
+}
+
+.content {
+  width: 230px;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 12px;
+  height: 436px;
+  position: relative;
+}
+
+.title {
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.price {
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.brand {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.55);
+  margin-bottom: 40px;
+}
+
+.description {
+  font-size: 12px;
+}
+
+.button {
+  position: absolute;
+  bottom: 0;
+}
+
+.img {
+  max-height: 366px;
+  max-width: 366px;
+  margin: auto;
 }

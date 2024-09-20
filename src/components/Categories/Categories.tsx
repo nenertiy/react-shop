@@ -16,7 +16,6 @@ const Categories: FC = () => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`${API_URL}/categories`).then((json) => console.log(json.data));
     axios
       .get(`${API_URL}/categories`)
       .then((json) => setCategories(json.data))
