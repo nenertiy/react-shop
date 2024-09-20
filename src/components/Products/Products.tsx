@@ -17,17 +17,21 @@ const Products: FC = () => {
   const [searchProducts, setSearchProducts] = useState<string>("");
   const [products, setProducts] = useState<ProductsState[]>([]);
 
+  const [pagination, setPagination] = useState<number>(0);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchProducts(value);
   };
 
   useEffect(() => {
-    // axios.get(`${API_URL}/search?q=${searchProducts}`).then((json) => console.log(json.data));
     axios
-      .get(`${API_URL}/search?q=${searchProducts}`)
+      .get(`${API_URL}/search?q=${searchProducts}&limit=30&skip=${pagination}`)
+      .then((json) => console.log(json.data));
+    axios
+      .get(`${API_URL}/search?q=${searchProducts}&limit=30&skip=${pagination}`)
       .then((json) => setProducts(json.data.products));
-  }, [searchProducts]);
+  }, [searchProducts, pagination]);
 
   return (
     <div className={styles.container}>
@@ -50,6 +54,7 @@ const Products: FC = () => {
           />
         ))}
       </div>
+      <button onClick={() => setPagination((prev) => prev + 30)}>Skip</button>
     </div>
   );
 };

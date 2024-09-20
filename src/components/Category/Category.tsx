@@ -21,7 +21,7 @@ const Category: FC = () => {
   const [search, setSearch] = useState<string>("");
   const [isLoading, setLoading] = useState<boolean>(true);
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
 
   useEffect(() => {
     axios
