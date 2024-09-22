@@ -1,6 +1,8 @@
 .container {
   margin-top: 30px;
   margin-bottom: 30px;
+  max-width: 1200px;
+  margin-inline: auto;
 }
 
 .input {
@@ -12,4 +14,16 @@
   display: flex;
   gap: 36px;
   flex-wrap: wrap;
+}
+
+.pagination {
+  display: flex;
+  margin-top: 30px;
+  justify-content: space-between;
+}
+
+.button {
+  padding: 0;
+  border: none;
+  cursor: pointer;
 }

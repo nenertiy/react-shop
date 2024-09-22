@@ -6,6 +6,7 @@ import BackButton from "../BackButton/BackButton";
 import { API_URL } from "../../utils/constants";
 import axios from "axios";
 import AddButton from "../AddButton/AddButton";
+import SkeletonProduct from "./SkeletonProduct";
 
 const Product: FC = () => {
   interface ProductState {
@@ -25,35 +26,43 @@ const Product: FC = () => {
     images: "",
   });
 
+  const [isLoading, setLoading] = useState(true);
+
   useEffect(() => {
-    axios.get(`${API_URL}/${id}`).then((json) => setProduct(json.data));
-    // .finally(() => setLoading(false));
+    axios
+      .get(`${API_URL}/${id}`)
+      .then((json) => setProduct(json.data))
+      .finally(() => setLoading(false));
     // console.log(product);
   }, [id]);
 
   return (
     <div className={styles.container}>
       <BackButton />
-      <div className={styles.card}>
-        <div className={styles.container_img}>
-          <img
-            className={styles.img}
-            src={product.images[0]}
-            alt=""
-          />
-        </div>
-        <div className={styles.container_description}>
-          <div className={styles.content}>
-            <div className={styles.title}>{product.title}</div>
-            <div className={styles.price}>${product.price}</div>
-            <div className={styles.brand}>{product.brand}</div>
-            <div className={styles.description}>{product.description}</div>
-            <div className={styles.button}>
-              <AddButton />
+      {isLoading ? (
+        <SkeletonProduct />
+      ) : (
+        <div className={styles.card}>
+          <div className={styles.container_img}>
+            <img
+              className={styles.img}
+              src={product.images[0]}
+              alt=""
+            />
+          </div>
+          <div className={styles.container_description}>
+            <div className={styles.content}>
+              <div className={styles.title}>{product.title}</div>
+              <div className={styles.price}>${product.price}</div>
+              <div className={styles.brand}>{product.brand}</div>
+              <div className={styles.description}>{product.description}</div>
+              <div className={styles.button}>
+                <AddButton />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

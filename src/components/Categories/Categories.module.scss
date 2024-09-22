@@ -1,6 +1,9 @@
 .container {
   margin-top: 30px;
   margin-bottom: 30px;
+  max-width: 1200px;
+  margin-inline: auto;
+  // min-height: calc(100vh - 140px - 105px);
 }
 
 .center {

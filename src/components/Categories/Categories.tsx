@@ -5,6 +5,7 @@ import Input from "../Input/Input";
 import axios from "axios";
 import { API_URL } from "../../utils/constants";
 import { Link } from "react-router-dom";
+import SkeletonCategories from "./SkeletonCategories";
 
 const Categories: FC = () => {
   interface CategoriesState {
@@ -15,11 +16,19 @@ const Categories: FC = () => {
   const [categories, setCategories] = useState<CategoriesState[]>([]);
   const [isLoading, setLoading] = useState(true);
 
+  const fetchCategories = async () => {
+    try {
+      const { data } = await axios.get(`${API_URL}/categories`);
+      setCategories(data);
+    } catch {
+      console.log("error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    axios
-      .get(`${API_URL}/categories`)
-      .then((json) => setCategories(json.data))
-      .finally(() => setLoading(false));
+    fetchCategories();
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +46,7 @@ const Categories: FC = () => {
       </div>
       <ul className={styles.list}>
         {isLoading ? (
-          <p>Loading...</p>
+          <SkeletonCategories arr={24} />
         ) : (
           categories
             .filter((category) =>

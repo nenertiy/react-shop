@@ -1,6 +1,8 @@
 .container {
   margin: 30px 0;
-  display: inline;
+  // display: inline;
+  max-width: 1200px;
+  margin: auto;
 
   &_img {
     height: 438px;
@@ -25,7 +27,7 @@
   width: 875px;
   height: 498px;
   // background: #000;
-  margin-top: 20px;
+  margin-top: 60px;
   margin-inline: auto;
   justify-content: space-between;
 }

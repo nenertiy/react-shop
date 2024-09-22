@@ -7,6 +7,7 @@ import { API_URL } from "../../utils/constants";
 import axios from "axios";
 import ProductCard from "../ProductCard/ProductCard";
 import BackButton from "../BackButton/BackButton";
+import SkeletonProducts from "../Products/SkeletonProducts";
 
 const Category: FC = () => {
   interface CardState {
@@ -28,7 +29,7 @@ const Category: FC = () => {
       .get(`${API_URL}/category/${id}`)
       .then((json) => setCard(json.data.products))
       .finally(() => setLoading(false));
-  }, [card, id]);
+  }, [id]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -46,7 +47,7 @@ const Category: FC = () => {
       <BackButton />
       <div className={styles.cards}>
         {isLoading ? (
-          <p>Loading...</p>
+          <SkeletonProducts arr={Math.floor(Math.random() * 15) + 5} />
         ) : (
           card
             .filter((el) => el.title.toLowerCase().includes(search.toLowerCase()))
