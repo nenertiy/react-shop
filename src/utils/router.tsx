@@ -4,6 +4,7 @@ import Categories from "../components/Categories/Categories";
 import Category from "../components/Category/Category";
 import Product from "../components/Product/Product";
 import Products from "../components/Products/Products";
+import Cart from "../components/Cart/Cart";
 
 const router = createBrowserRouter([
   {
@@ -17,10 +18,6 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
-      },
-      {
-        path: "/collections/:id",
-        element: <h1>Collections:id</h1>,
       },
       {
         path: "/categories",
@@ -40,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <h1>Cart</h1>,
+        element: <Cart />,
       },
     ],
   },

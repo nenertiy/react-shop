@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import styles from "./Product.module.scss";
@@ -7,8 +7,13 @@ import { API_URL } from "../../utils/constants";
 import axios from "axios";
 import AddButton from "../AddButton/AddButton";
 import SkeletonProduct from "./SkeletonProduct";
+import { CartContext } from "../../context/cartContext";
 
 const Product: FC = () => {
+  const { id } = useParams();
+
+  const { addToCart } = useContext(CartContext);
+
   interface ProductState {
     title: string;
     price: number;
@@ -16,7 +21,6 @@ const Product: FC = () => {
     description: string;
     images: string;
   }
-  const { id } = useParams();
 
   const [product, setProduct] = useState<ProductState>({
     title: "",
@@ -33,7 +37,6 @@ const Product: FC = () => {
       .get(`${API_URL}/${id}`)
       .then((json) => setProduct(json.data))
       .finally(() => setLoading(false));
-    // console.log(product);
   }, [id]);
 
   return (
@@ -57,7 +60,7 @@ const Product: FC = () => {
               <div className={styles.brand}>{product.brand}</div>
               <div className={styles.description}>{product.description}</div>
               <div className={styles.button}>
-                <AddButton />
+                <AddButton onClick={() => addToCart(product)} />
               </div>
             </div>
           </div>

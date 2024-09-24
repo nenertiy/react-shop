@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <div style={{ minHeight: "calc(100vh - 110px - 105px" }}>
+      <div style={{ minHeight: "calc(100vh - 170px - 105px" }}>
         <Outlet />
       </div>
       {/* <Outlet /> */}
