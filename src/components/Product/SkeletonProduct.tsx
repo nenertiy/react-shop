@@ -14,7 +14,7 @@ const SkeletonProduct: FC = () => {
           <div className={styles.brand}></div>
           <div className={styles.description}></div>
           <div className={styles.button}>
-            <AddButton />
+            <AddButton onClick={() => {}} />
           </div>
         </div>
       </div>

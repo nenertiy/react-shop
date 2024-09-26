@@ -6,6 +6,7 @@ import Product from "../components/Product/Product";
 import Products from "../components/Products/Products";
 import Cart from "../components/Cart/Cart";
 import Favorite from "../components/Favorite/Favorite";
+import Home from "../components/Home/Home";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Home</h1>,
+        element: <Home />,
       },
       {
         path: "/products",

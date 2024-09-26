@@ -1,66 +1,64 @@
-import { createContext, FC, ReactNode, useEffect, useState } from "react";
+import { createContext, FC, ReactNode, useEffect, useState, useMemo } from "react";
 
-export const FavoriteContext = createContext([]);
+interface Item {
+  id: number;
+  price: number;
+  title: string;
+  brand: string;
+  thumbnail: string;
+}
+
+interface FavoriteContextProps {
+  favoriteItems: Item[];
+  isFavorite: (item: Item) => boolean;
+  addFavorite: (item: Item) => void;
+  removeFavorite: (item: Item) => void;
+  clearFavorite: () => void;
+}
+
+export const FavoriteContext = createContext<FavoriteContextProps | undefined>(undefined);
 
 interface FavoriteProviderProps {
   children: ReactNode;
 }
 
 export const FavoriteProvider: FC<FavoriteProviderProps> = ({ children }) => {
-  const [favoriteItems, setFavoriteItems] = useState(
-    localStorage.getItem("favoriteItems") ? JSON.parse(localStorage.getItem("favoriteItems")) : []
+  const loadFavoritesFromStorage = () => {
+    const storedFavorites = localStorage.getItem("favoriteItems");
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  };
+
+  const [favoriteItems, setFavoriteItems] = useState<Item[]>(loadFavoritesFromStorage);
+
+  const isFavorite = useMemo(
+    () => (item: Item) => !!favoriteItems.find((favoriteItem) => favoriteItem.id === item.id),
+    [favoriteItems]
   );
 
-  type Item = {
-    id: number;
-    price: number;
-    title: string;
-    brand: string;
-    thumbnail: string;
-  };
-
-  const isFavorite = (item: Item) => {
-    return favoriteItems.find((favoriteItem: { id: number }) => favoriteItem.id === item.id);
-  };
-
   const addFavorite = (item: Item) => {
-    const isFavorite = favoriteItems.find(
-      (favoriteItem: { id: number }) => favoriteItem.id === item.id
-    );
-    if (!isFavorite) {
-      setFavoriteItems([...favoriteItems, item]);
+    if (!isFavorite(item)) {
+      setFavoriteItems((prevItems) => [...prevItems, item]);
     }
   };
 
   const removeFavorite = (item: Item) => {
-    const isFavorite = favoriteItems.find(
-      (favoriteItem: { id: number }) => favoriteItem.id === item.id
+    setFavoriteItems((prevItems) =>
+      prevItems.filter((favoriteItem) => favoriteItem.id !== item.id)
     );
-    if (isFavorite) {
-      setFavoriteItems(
-        favoriteItems.filter((favoriteItem: { id: number }) => favoriteItem.id !== item.id)
-      );
-    }
   };
 
   const clearFavorite = () => {
     setFavoriteItems([]);
   };
 
+  // Save favorite items to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
   }, [favoriteItems]);
 
-  useEffect(() => {
-    const favoriteItems = localStorage.getItem("favoriteItems");
-    if (favoriteItems) {
-      setFavoriteItems(JSON.parse(favoriteItems));
-    }
-  }, []);
-
   return (
     <FavoriteContext.Provider
-      value={{ isFavorite, favoriteItems, addFavorite, removeFavorite, clearFavorite }}>
+      value={{ favoriteItems, isFavorite, addFavorite, removeFavorite, clearFavorite }}>
       {children}
     </FavoriteContext.Provider>
   );

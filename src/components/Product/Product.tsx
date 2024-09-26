@@ -14,23 +14,26 @@ import FavoriteButton from "../FavoriteButton/FavoriteButton";
 const Product: FC = () => {
   const { id } = useParams();
 
-  const { addToCart } = useContext(CartContext);
-  const { addFavorite, isFavorite, removeFavorite } = useContext(FavoriteContext);
-
   interface ProductState {
     title: string;
     price: number;
     brand: string;
     description: string;
     images: string;
+    id: number;
+    thumbnail: string;
+    quantity: number;
   }
 
   const [product, setProduct] = useState<ProductState>({
+    id: 0,
     title: "",
     price: 0,
     brand: "",
     description: "",
     images: "",
+    thumbnail: "",
+    quantity: 0,
   });
 
   const [isLoading, setLoading] = useState(true);
@@ -41,6 +44,20 @@ const Product: FC = () => {
       .then((json) => setProduct(json.data))
       .finally(() => setLoading(false));
   }, [id]);
+
+  const cartContext = useContext(CartContext);
+  const favoriteContext = useContext(FavoriteContext);
+
+  if (!cartContext) {
+    return <div>Cart context is not available</div>;
+  }
+
+  if (!favoriteContext) {
+    return <div>Favorite context is not available</div>;
+  }
+
+  const { addToCart } = cartContext;
+  const { addFavorite, isFavorite, removeFavorite } = favoriteContext;
 
   return (
     <div className={styles.container}>

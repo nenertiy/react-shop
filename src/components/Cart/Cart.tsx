@@ -1,4 +1,4 @@
-import { FC, FormEvent, Key, useContext } from "react";
+import { FC, FormEvent, useContext } from "react";
 import BackButton from "../BackButton/BackButton";
 
 import styles from "./Cart.module.scss";
@@ -7,7 +7,13 @@ import { CartContext } from "../../context/cartContext";
 import CartCard from "../CartCard/CartCard";
 
 const Cart: FC = () => {
-  const { cartItems, addToCart, removeFromCart, getCartTotal } = useContext(CartContext);
+  const cartContext = useContext(CartContext);
+
+  if (!cartContext) {
+    return <div>Cart context is not available</div>;
+  }
+
+  const { cartItems, addToCart, removeFromCart, getCartTotal } = cartContext;
 
   const shippping = Math.floor(Math.random() * 30) + 1;
 
@@ -27,33 +33,24 @@ const Cart: FC = () => {
             <div className={styles.order}>your order</div>
             <div className={styles.list}>
               {cartItems.length > 0
-                ? cartItems.map(
-                    (cartItem: {
-                      id: Key;
-                      title: string;
-                      price: number;
-                      images: string;
-                      brand: string;
-                      quantity: number;
-                    }) => (
-                      <CartCard
-                        key={cartItem.id}
-                        title={cartItem.title}
-                        price={cartItem.price}
-                        images={cartItem.images[0]}
-                        brand={cartItem.brand}
-                        quantity={cartItem.quantity}
-                        handleMinus={() => removeFromCart(cartItem)}
-                        handlePlus={() => addToCart(cartItem)}
-                      />
-                    )
-                  )
+                ? cartItems.map((cartItem) => (
+                    <CartCard
+                      key={cartItem.id}
+                      title={cartItem.title}
+                      price={cartItem.price}
+                      images={cartItem.images[0]}
+                      brand={cartItem.brand}
+                      quantity={cartItem.quantity}
+                      handleMinus={() => removeFromCart(cartItem)}
+                      handlePlus={() => addToCart(cartItem)}
+                    />
+                  ))
                 : "Your cart is empty"}
             </div>
             <div className={styles.line}></div>
             <div className={styles.subtotal}>
               <div>Subtotal</div>
-              <div>{getCartTotal()}$</div>
+              <div>{Math.floor(getCartTotal())}$</div>
             </div>
             <div className={styles.subtotal}>
               <div>Shipping</div>
@@ -62,7 +59,7 @@ const Cart: FC = () => {
             <div className={styles.line}></div>
             <div className={styles.total}>
               <div>Total</div>
-              <div>{Math.floor(shippping + getCartTotal())}$</div>
+              <div>{Math.round(shippping + getCartTotal())}$</div>
             </div>
           </div>
         </div>

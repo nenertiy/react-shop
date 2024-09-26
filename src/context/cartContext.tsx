@@ -1,32 +1,36 @@
-import { createContext, FC, ReactNode, useEffect, useState } from "react";
+import { createContext, FC, ReactNode, useState, useEffect } from "react";
 
-export const CartContext = createContext([]);
+interface Item {
+  id: number;
+  quantity: number;
+  price: number;
+  title: string;
+  brand: string;
+  images: string;
+}
+
+interface CartContextProps {
+  cartItems: Item[];
+  addToCart: (item: Item) => void;
+  removeFromCart: (item: Item) => void;
+  clearCart: () => void;
+  getCartTotal: () => number;
+}
+
+export const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 interface CartProviderProps {
   children: ReactNode;
 }
 
 export const CartProvider: FC<CartProviderProps> = ({ children }) => {
-  const [cartItems, setCartItems] = useState(
-    localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : []
-  );
-
-  type Item = {
-    id: number;
-    quantity: number;
-    price: number;
-    title: string;
-    brand: string;
-    thumbnail: string;
-    handleMinus: () => void;
-    handlePlus: () => void;
-  };
+  const [cartItems, setCartItems] = useState<Item[]>([]);
 
   const addToCart = (item: Item) => {
-    const isItemInCart = cartItems.find((cartItem: { id: number }) => cartItem.id === item.id);
+    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
     if (isItemInCart) {
       setCartItems(
-        cartItems.map((cartItem: { id: number; quantity: number }) =>
+        cartItems.map((cartItem) =>
           cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
         )
       );
@@ -41,7 +45,7 @@ export const CartProvider: FC<CartProviderProps> = ({ children }) => {
       setCartItems(cartItems.filter((cartItem: { id: number }) => cartItem.id !== item.id));
     } else {
       setCartItems(
-        cartItems.map((cartItem: { id: number; quantity: number }) =>
+        cartItems.map((cartItem) =>
           cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem
         )
       );
@@ -53,33 +57,15 @@ export const CartProvider: FC<CartProviderProps> = ({ children }) => {
   };
 
   const getCartTotal = () => {
-    return cartItems.reduce(
-      (total: number, item: { price: number; quantity: number }) =>
-        total + item.price * item.quantity,
-      0
-    );
+    return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  useEffect(() => {
-    const cartItems = localStorage.getItem("cartItems");
-    if (cartItems) {
-      setCartItems(JSON.parse(cartItems));
-    }
-  }, []);
-
   return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        addToCart,
-        removeFromCart,
-        clearCart,
-        getCartTotal,
-      }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, getCartTotal }}>
       {children}
     </CartContext.Provider>
   );
