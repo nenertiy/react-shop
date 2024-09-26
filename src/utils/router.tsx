@@ -5,6 +5,7 @@ import Category from "../components/Category/Category";
 import Product from "../components/Product/Product";
 import Products from "../components/Products/Products";
 import Cart from "../components/Cart/Cart";
+import Favorite from "../components/Favorite/Favorite";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/favorite",
-        element: <h1>Favorite</h1>,
+        element: <Favorite />,
       },
       {
         path: "/cart",

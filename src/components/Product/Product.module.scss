@@ -36,7 +36,7 @@
 .content {
   width: 230px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 0px;
   margin-bottom: 12px;
   height: 436px;
   position: relative;
@@ -72,4 +72,12 @@
   max-height: 366px;
   max-width: 366px;
   margin: auto;
+}
+
+.favorite {
+  // position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row-reverse;
 }

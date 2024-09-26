@@ -12,8 +12,8 @@ const SkeletonProducts: FC<SkeletonProductsProps> = ({ arr }) => {
 
   return (
     <div className={styles.cards}>
-      {array.map(() => (
-        <SkeletonProductCard />
+      {array.map((_, index) => (
+        <SkeletonProductCard key={index} />
       ))}
     </div>
   );

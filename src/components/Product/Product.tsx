@@ -8,11 +8,14 @@ import axios from "axios";
 import AddButton from "../AddButton/AddButton";
 import SkeletonProduct from "./SkeletonProduct";
 import { CartContext } from "../../context/cartContext";
+import { FavoriteContext } from "../../context/favoriteContext";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 const Product: FC = () => {
   const { id } = useParams();
 
   const { addToCart } = useContext(CartContext);
+  const { addFavorite, isFavorite, removeFavorite } = useContext(FavoriteContext);
 
   interface ProductState {
     title: string;
@@ -54,6 +57,14 @@ const Product: FC = () => {
             />
           </div>
           <div className={styles.container_description}>
+            <div className={styles.favorite}>
+              <FavoriteButton
+                isFavorite={isFavorite(product)}
+                handleFavorite={
+                  isFavorite(product) ? () => removeFavorite(product) : () => addFavorite(product)
+                }
+              />
+            </div>
             <div className={styles.content}>
               <div className={styles.title}>{product.title}</div>
               <div className={styles.price}>${product.price}</div>
