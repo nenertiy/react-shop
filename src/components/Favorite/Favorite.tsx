@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 
 import styles from "./Favorite.module.scss";
 import Input from "../Input/Input";
@@ -6,9 +6,14 @@ import { FavoriteContext } from "../../context/favoriteContext";
 import ProductCard from "../ProductCard/ProductCard";
 
 const Favorite: FC = () => {
-  const { favoriteItems } = useContext(FavoriteContext);
-
   const [searchValue, setSeacrhValue] = useState("");
+
+  const favoriteContext = useContext(FavoriteContext);
+
+  if (!favoriteContext) {
+    return <div>Favorite context is not available</div>;
+  }
+  const { favoriteItems } = favoriteContext;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -28,24 +33,16 @@ const Favorite: FC = () => {
           .filter((item: { title: string }) =>
             item.title.toLowerCase().includes(searchValue.toLowerCase())
           )
-          .map(
-            (item: {
-              id: number;
-              thumbnail: string;
-              title: string;
-              category: string;
-              price: number;
-            }) => (
-              <ProductCard
-                key={item.id}
-                id={item.id}
-                img={item.thumbnail}
-                title={item.title}
-                category={item.category}
-                price={item.price}
-              />
-            )
-          )}
+          .map((item) => (
+            <ProductCard
+              key={item.id}
+              id={item.id}
+              img={item.thumbnail}
+              title={item.title}
+              category={item.category}
+              price={item.price}
+            />
+          ))}
       </div>
     </div>
   );

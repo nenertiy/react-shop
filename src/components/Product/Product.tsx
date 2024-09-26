@@ -23,6 +23,7 @@ const Product: FC = () => {
     id: number;
     thumbnail: string;
     quantity: number;
+    category: string;
   }
 
   const [product, setProduct] = useState<ProductState>({
@@ -34,6 +35,7 @@ const Product: FC = () => {
     images: "",
     thumbnail: "",
     quantity: 0,
+    category: "",
   });
 
   const [isLoading, setLoading] = useState(true);

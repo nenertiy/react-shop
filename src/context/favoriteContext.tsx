@@ -1,6 +1,7 @@
 import { createContext, FC, ReactNode, useEffect, useState, useMemo } from "react";
 
 interface Item {
+  category: string;
   id: number;
   price: number;
   title: string;
