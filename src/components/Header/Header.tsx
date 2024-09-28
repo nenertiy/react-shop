@@ -58,7 +58,7 @@ const Header: FC = () => {
             />
           </div>
         </RouterLink>
-        <RouterLink to="/profile">
+        <RouterLink to="/">
           <div className={styles.circle}>
             <img
               src={profile}
