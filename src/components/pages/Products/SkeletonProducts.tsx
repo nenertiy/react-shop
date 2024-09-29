@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import styles from "./Products.module.scss";
-import SkeletonProductCard from "../ProductCard/SkeletonProductCard";
+import SkeletonProductCard from "../../ui/ProductCard/SkeletonProductCard";
 
 interface SkeletonProductsProps {
   arr: number;

@@ -1,13 +1,13 @@
 import { FC, useEffect, useState } from "react";
 
+import Input from "../../ui/Input/Input";
 import styles from "./Category.module.scss";
-import Input from "../Input/Input";
 import { useParams } from "react-router-dom";
-import { API_URL } from "../../utils/constants";
+import { API_URL } from "../../../utils/constants";
 import axios from "axios";
-import ProductCard from "../ProductCard/ProductCard";
-import BackButton from "../BackButton/BackButton";
+import BackButton from "../../ui/BackButton/BackButton";
 import SkeletonProducts from "../Products/SkeletonProducts";
+import ProductCard from "../../ui/ProductCard/ProductCard";
 
 const Category: FC = () => {
   interface CardState {

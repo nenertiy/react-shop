@@ -1,6 +1,6 @@
 import { FC, FormEvent } from "react";
 
-import arrowNext from "../../assets/img/ArrowNext.svg";
+import arrowNext from "../../../assets/img/ArrowNext.svg";
 
 import styles from "./Form.module.scss";
 

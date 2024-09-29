@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
+import Header from "./components/ui/Header/Header";
+import Footer from "./components/ui/Footer/Footer";
 
 const Layout = () => {
   return (
@@ -9,7 +9,6 @@ const Layout = () => {
       <div style={{ minHeight: "calc(100vh - 170px - 105px" }}>
         <Outlet />
       </div>
-      {/* <Outlet /> */}
       <Footer />
     </>
   );

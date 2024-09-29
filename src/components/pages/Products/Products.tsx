@@ -1,28 +1,29 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import axios from "axios";
 
-import Input from "../Input/Input";
-import ProductCard from "../ProductCard/ProductCard";
+import Input from "../../ui/Input/Input";
+import ProductCard from "../../ui/ProductCard/ProductCard";
 
-import { API_URL } from "../../utils/constants";
-import arrowBack from "../../assets/img/ArrowBack.svg";
-import arrowNext from "../../assets/img/ArrowNext.svg";
+import { API_URL } from "../../../utils/constants";
+import arrowBack from "../../../assets/img/ArrowBack.svg";
+import arrowNext from "../../../assets/img/ArrowNext.svg";
 
 import styles from "./Products.module.scss";
 import SkeletonProducts from "./SkeletonProducts";
+import { useQuery } from "@tanstack/react-query";
 
 const Products: FC = () => {
   interface ProductsState {
-    id: number;
     images: string;
     category: string;
-    title: string;
     price: number;
+    title: string;
+    id: number;
+    product: string;
   }
+
   const [searchProducts, setSearchProducts] = useState<string>("");
-  const [products, setProducts] = useState<ProductsState[]>([]);
   const [pagination, setPagination] = useState<number>(0);
-  const [isLoading, setLoading] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -49,25 +50,21 @@ const Products: FC = () => {
     });
   };
 
-  const fetchProducts = async () => {
-    try {
-      const { data } = await axios.get(`${API_URL}/search?q=${searchProducts}`, {
+  const fetchProducts = async (page: number, search: string): Promise<ProductsState[]> =>
+    axios
+      .get(`${API_URL}/search?q=${search}`, {
         params: {
           limit: 30,
-          skip: pagination,
+          skip: page,
         },
-      });
-      setProducts(data.products);
-    } catch {
-      console.log("error");
-    } finally {
-      setLoading(false);
-    }
-  };
+      })
+      .then((res) => res.data)
+      .then((data) => data.products);
 
-  useEffect(() => {
-    fetchProducts();
-  }, [pagination, searchProducts]);
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ["dataProducts", pagination, searchProducts],
+    queryFn: () => fetchProducts(pagination, searchProducts),
+  });
 
   return (
     <div className={styles.container}>
@@ -82,7 +79,8 @@ const Products: FC = () => {
         {isLoading ? (
           <SkeletonProducts arr={30} />
         ) : (
-          products.map((product) => (
+          isSuccess &&
+          data.map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}

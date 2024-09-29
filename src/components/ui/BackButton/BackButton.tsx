@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
-import arrowBack from "../../assets/img/ArrowBack.svg";
+import arrowBack from "../../../assets/img/ArrowBack.svg";
 
 import styles from "./BackButton.module.scss";
 

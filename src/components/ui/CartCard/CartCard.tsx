@@ -2,8 +2,8 @@ import { FC } from "react";
 
 import styles from "./CartCard.module.scss";
 
-import Minus from "../../assets/img/Minus.svg";
-import Plus from "../../assets/img/Plus.svg";
+import Minus from "../../../assets/img/Minus.svg";
+import Plus from "../../../assets/img/Plus.svg";
 
 interface CartCardProps {
   images: string;

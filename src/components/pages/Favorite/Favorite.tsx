@@ -1,9 +1,9 @@
 import React, { FC, useContext, useState } from "react";
 
 import styles from "./Favorite.module.scss";
-import Input from "../Input/Input";
-import { FavoriteContext } from "../../context/favoriteContext";
-import ProductCard from "../ProductCard/ProductCard";
+import Input from "../../ui/Input/Input";
+import { FavoriteContext } from "../../../context/favoriteContext";
+import ProductCard from "../../ui/ProductCard/ProductCard";
 
 const Favorite: FC = () => {
   const [searchValue, setSeacrhValue] = useState("");

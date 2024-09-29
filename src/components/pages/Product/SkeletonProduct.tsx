@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import styles from "./SkeletonProduct.module.scss";
-import AddButton from "../AddButton/AddButton";
+import AddButton from "../../ui/AddButton/AddButton";
 
 const SkeletonProduct: FC = () => {
   return (

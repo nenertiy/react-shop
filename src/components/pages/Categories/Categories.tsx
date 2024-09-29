@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
 
 import styles from "./Categories.module.scss";
-import Input from "../Input/Input";
+import Input from "../../ui/Input/Input";
 import axios from "axios";
-import { API_URL } from "../../utils/constants";
+import { API_URL } from "../../../utils/constants";
 import { Link } from "react-router-dom";
 import SkeletonCategories from "./SkeletonCategories";
 

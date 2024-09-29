@@ -1,19 +1,13 @@
-import { FC, FormEvent, useContext } from "react";
-import BackButton from "../BackButton/BackButton";
+import { FC, FormEvent } from "react";
+import BackButton from "../../ui/BackButton/BackButton";
 
 import styles from "./Cart.module.scss";
-import Form from "../Form/Form";
-import { CartContext } from "../../context/cartContext";
-import CartCard from "../CartCard/CartCard";
+import Form from "../../ui/Form/Form";
+import CartCard from "../../ui/CartCard/CartCard";
+import useCartStore from "../../../store/cartStore";
 
 const Cart: FC = () => {
-  const cartContext = useContext(CartContext);
-
-  if (!cartContext) {
-    return <div>Cart context is not available</div>;
-  }
-
-  const { cartItems, addToCart, removeFromCart, getCartTotal } = cartContext;
+  const { addItemToCart, removeItemFromCart, getTotalCart, cartItems } = useCartStore();
 
   const shippping = Math.floor(Math.random() * 30) + 1;
 
@@ -41,8 +35,8 @@ const Cart: FC = () => {
                       images={cartItem.images[0]}
                       brand={cartItem.brand}
                       quantity={cartItem.quantity}
-                      handleMinus={() => removeFromCart(cartItem)}
-                      handlePlus={() => addToCart(cartItem)}
+                      handleMinus={() => removeItemFromCart(cartItem)}
+                      handlePlus={() => addItemToCart(cartItem)}
                     />
                   ))
                 : "Your cart is empty"}
@@ -50,7 +44,7 @@ const Cart: FC = () => {
             <div className={styles.line}></div>
             <div className={styles.subtotal}>
               <div>Subtotal</div>
-              <div>{Math.floor(getCartTotal())}$</div>
+              <div>{Math.floor(getTotalCart())}$</div>
             </div>
             <div className={styles.subtotal}>
               <div>Shipping</div>
@@ -59,7 +53,7 @@ const Cart: FC = () => {
             <div className={styles.line}></div>
             <div className={styles.total}>
               <div>Total</div>
-              <div>{Math.round(shippping + getCartTotal())}$</div>
+              <div>{Math.round(shippping + getTotalCart())}$</div>
             </div>
           </div>
         </div>
