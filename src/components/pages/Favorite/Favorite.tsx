@@ -37,7 +37,7 @@ const Favorite: FC = () => {
             <ProductCard
               key={item.id}
               id={item.id}
-              img={item.thumbnail}
+              img={item.images[0]}
               title={item.title}
               category={item.category}
               price={item.price}

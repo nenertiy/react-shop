@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface CartItem {
-  images: string[];
+  images: string;
   category: string;
   price: number;
   title: string;

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 
 import styles from "./Categories.module.scss";
 import Input from "../../ui/Input/Input";
@@ -6,6 +6,7 @@ import axios from "axios";
 import { API_URL } from "../../../utils/constants";
 import { Link } from "react-router-dom";
 import SkeletonCategories from "./SkeletonCategories";
+import { useQuery } from "@tanstack/react-query";
 
 const Categories: FC = () => {
   interface CategoriesState {
@@ -13,23 +14,14 @@ const Categories: FC = () => {
     name: string;
   }
   const [searchCategories, setSearchCategories] = useState<string>("");
-  const [categories, setCategories] = useState<CategoriesState[]>([]);
-  const [isLoading, setLoading] = useState(true);
 
-  const fetchCategories = async () => {
-    try {
-      const { data } = await axios.get(`${API_URL}/categories`);
-      setCategories(data);
-    } catch {
-      console.log("error");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const fetchCategories = async (): Promise<CategoriesState[]> =>
+    axios.get(`${API_URL}/categories`).then((res) => res.data);
 
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+  const { data, isSuccess, isLoading } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => fetchCategories(),
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -48,7 +40,8 @@ const Categories: FC = () => {
         {isLoading ? (
           <SkeletonCategories arr={24} />
         ) : (
-          categories
+          isSuccess &&
+          data
             .filter((category) =>
               category.name.toLowerCase().includes(searchCategories.toLowerCase())
             )

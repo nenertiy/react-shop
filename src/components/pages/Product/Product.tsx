@@ -16,7 +16,7 @@ interface ProductState {
   price: number;
   brand: string;
   description: string;
-  images: string[];
+  images: string;
   id: number;
   thumbnail: string;
   quantity: number;

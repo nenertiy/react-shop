@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 
 import Input from "../../ui/Input/Input";
 import styles from "./Category.module.scss";
@@ -8,28 +8,30 @@ import axios from "axios";
 import BackButton from "../../ui/BackButton/BackButton";
 import SkeletonProducts from "../Products/SkeletonProducts";
 import ProductCard from "../../ui/ProductCard/ProductCard";
+import { useQuery } from "@tanstack/react-query";
 
 const Category: FC = () => {
   interface CardState {
-    images: string;
+    images: string[];
     category: string;
     title: string;
     price: number;
     id: number;
   }
 
-  const [card, setCard] = useState<CardState[]>([]);
   const [search, setSearch] = useState<string>("");
-  const [isLoading, setLoading] = useState<boolean>(true);
   const { id } = useParams();
-  // console.log(id);
 
-  useEffect(() => {
+  const fetchCategory = async (id: string | undefined): Promise<CardState[]> =>
     axios
       .get(`${API_URL}/category/${id}`)
-      .then((json) => setCard(json.data.products))
-      .finally(() => setLoading(false));
-  }, [id]);
+      .then((res) => res.data)
+      .then((data) => data.products);
+
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ["category", id],
+    queryFn: () => fetchCategory(id),
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -49,7 +51,8 @@ const Category: FC = () => {
         {isLoading ? (
           <SkeletonProducts arr={Math.floor(Math.random() * 15) + 5} />
         ) : (
-          card
+          isSuccess &&
+          data
             .filter((el) => el.title.toLowerCase().includes(search.toLowerCase()))
             .map((el) => (
               <ProductCard
