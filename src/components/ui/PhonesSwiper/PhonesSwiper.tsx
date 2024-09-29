@@ -35,7 +35,7 @@ const PhonesSwiper: FC = () => {
       <div className={styles.swiper}>
         <Swiper
           slidesPerView={4}
-          spaceBetween={10}
+          spaceBetween={40}
           pagination={{ clickable: true }}
           autoplay={{
             delay: 2500,
