@@ -1,4 +1,4 @@
-# React Shop - Built with Vite, Zustand, and TanStack Query
+# [React Shop - Built with Vite, Zustand, and TanStack Query](https://react-shop-swart-five.vercel.app)
 
 This is a feature-rich online store built with **React** and powered by **Vite** for fast and efficient development. The app integrates with an **Open API** to fetch product data dynamically. For state management, we use **Zustand**, and for handling server-side data fetching and caching, **TanStack Query** (React Query) is implemented, making this app scalable and performant.
 
