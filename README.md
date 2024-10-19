@@ -21,7 +21,7 @@ This is a feature-rich online store built with **React** and powered by **Vite**
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-username/react-shop.git
+   git clone https://github.com/nenertiy/react-shop.git
 
 2. Navigate to the project directory:
    ```bash
