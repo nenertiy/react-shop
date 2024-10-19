@@ -1,33 +1,23 @@
-# React Shop - Built with Vite, Zustand, and TanStack Query
+# Backend Coffee Shop - Built with NestJS, Prisma, and PostgreSQL
 
-This is a feature-rich online store built with **React** and powered by **Vite** for fast and efficient development. The app integrates with an **Open API** to fetch product data dynamically. For state management, we use **Zustand**, and for handling server-side data fetching and caching, **TanStack Query** (React Query) is implemented, making this app scalable and performant.
+This repository contains the backend of a Coffee Shop application, built using **NestJS** for a modular and maintainable structure, **Prisma** as the ORM for interacting with a **PostgreSQL** database, and designed to provide APIs for managing products, orders, and customers.
 
 ## Features:
-- **Vite**: Fast build tool and development server for lightning-fast hot reloading and bundling.
-- **React**: Component-based architecture for a smooth and dynamic user interface.
-- **Zustand**: Lightweight and easy-to-use state management for handling global states like shopping cart and user data.
-- **TanStack Query (React Query)**: Manages asynchronous server-side data fetching, caching, and synchronization with ease.
-- **Open API**: Fetches real-time product data from an external API.
+- **NestJS**: A scalable and modular framework for building server-side applications.
+- **Prisma ORM**: Simplifies database access and queries for PostgreSQL.
+- **PostgreSQL**: Relational database used for storing coffee shop data (products, orders, users).
+- **Environment Configuration**: Easily configurable via an `.env` file for PostgreSQL connection.
 
 ## Tech Stack:
-- **Vite** - Development and build tool
-- **React** - UI framework
-- **Zustand** - Global state management
-- **TanStack Query** - Server-side data fetching and caching
-- **CSS/Styled Components** - For styling components
+- **NestJS** - Backend framework
+- **Prisma** - ORM for database management
+- **PostgreSQL** - Relational database
+- **TypeScript** - Primary language for the backend
 
-## How to Run the Project:
+## Setting Up the Project
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-username/react-shop.git
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/your-username/backend-coffee-shop.git
 
-2. Navigate to the project directory:
-   ```bash
-   cd react-shop
-
-3. Install dependencies:
-   ```bash
-   npm install
-
-  
+### Step 2: 
