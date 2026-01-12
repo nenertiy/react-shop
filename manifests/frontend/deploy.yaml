@@ -19,7 +19,7 @@ spec:
       containers:
         - name: react-shop
           image: pipelinefailed/react-shop:test-cluster
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
               name: http
