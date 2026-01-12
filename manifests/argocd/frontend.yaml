@@ -15,7 +15,7 @@ spec:
     metadata:
       name: frontend-{{cluster}}
     spec:
-      project: default
+      project: "{{cluster}}"
       source:
         repoURL: https://github.com/nenertiy/react-shop.git
         path: manifests/frontend
