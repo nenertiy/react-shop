@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 COPY bun.lockb ./
 
-RUN npm ci
+RUN npm i
 
 COPY . .
 
