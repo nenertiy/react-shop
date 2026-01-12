@@ -10,7 +10,7 @@ spec:
           - cluster: in-cluster
             url: https://188.225.85.118:6443
           - cluster: prod2-cluster
-            url: https://94.228.123.177:6443
+            url: https://kubernetes.default.svc
   template:
     metadata:
       name: frontend-{{cluster}}
