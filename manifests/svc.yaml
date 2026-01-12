@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-shop-service
+  labels:
+    app: react-shop
+spec:
+  type: LoadBalancer
+  selector:
+    app: react-shop
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      name: http
